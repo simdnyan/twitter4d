@@ -5,7 +5,9 @@
     "authors": ["alphaKAI"],
     "copyright": "Copyright (C) 2014 alphaKAI",
     "license": "MIT",
-    "libs": ["curl"],
     "excludedSourceFiles": ["source/test.d"],
+    "dependencies": {
+        "requests": "~>0.3.2"
+    },
     "dflags-ldc":["-disable-linker-strip-dead"]
 }

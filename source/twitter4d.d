@@ -8,7 +8,6 @@ import std.digest.hmac,
        std.digest.sha,
        std.algorithm,
        std.datetime,
-       std.net.curl,
        std.base64,
        std.format,
        std.string,
@@ -20,6 +19,7 @@ import std.digest.hmac,
 import std.uri : encodeComponentUnsafe = encodeComponent;
 
 import core.exception;
+import requests;
 
 class Twitter4D {
   public bool developer;
@@ -126,19 +126,21 @@ class Twitter4D {
 
     string path = params.keys.map!(k => k ~ "=" ~ params[k]).join("&");
 
-    auto http = HTTP();
+    Request rq = Request();
 
-    http.addRequestHeader("Authorization", authorize);
+    rq.addHeaders(["Authorization": authorize]);
 
     if (method == "GET") {
-      return get(url ~ "?" ~ path, http);
+      return rq.get(url ~ "?" ~ path);
     } else if (method == "POST") {
-      return post(url, path, http);
+      return rq.post(url, path, "application/x-www-form-urlencoded");
     }
 
     return null;
   }
 
+
+/*
   public auto stream(string url = "https://userstream.twitter.com/1.1/user.json") {
     string[string] params = buildParams();
 
@@ -151,6 +153,8 @@ class Twitter4D {
 
     return streamSocket;
   }
+*/
+
 
   private string[string] buildParams(string[string] additionalParam = null) {
     import std.uuid : randomUUID;

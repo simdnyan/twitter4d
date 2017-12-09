@@ -18,9 +18,10 @@ void main(){
       "your accesstokensecret");
    */
 
-  writeln(t4d.request("POST", "statuses/update.json", ["status" : "test"]));
-  writeln(parseJSON(t4d.request("GET", "account/verify_credentials.json", ["":""])));
-  
+  writeln(t4d.request("POST", "statuses/update.json", ["status" : "test"]).responseBody);
+  writeln(parseJSON(t4d.request("GET", "account/verify_credentials.json", ["":""]).responseBody.to!string));
+
+/*
   foreach(line; t4d.stream()){
     if(match(line.to!string, regex(r"\{.*\}"))){
       auto parsed = parseJSON(line.to!string);
@@ -30,5 +31,6 @@ void main(){
             parsed.object["text"]);
       }
     }
+*/
 
 }
