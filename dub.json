@@ -7,7 +7,7 @@
     "license": "MIT",
     "excludedSourceFiles": ["source/test.d"],
     "dependencies": {
-        "requests": "~>0.3.2"
+        "requests": "~>1.0.8"
     },
     "dflags-ldc":["-disable-linker-strip-dead"]
 }
